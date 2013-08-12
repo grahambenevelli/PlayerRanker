@@ -19,7 +19,7 @@ from LeagueFactory import LeagueFactory
 # ----
 
 leagueFactory = LeagueFactory()
-league = leagueFactory.getLeague()
+league = leagueFactory.getLeague(sys.stdin, sys.stdout)
 
 ranker = Ranker(league, sys.stdin, sys.stdout)
 ranker.run()

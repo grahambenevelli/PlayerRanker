@@ -23,13 +23,21 @@ class Ranker:
     def run(self):
         while True:
             self.writer.write(">>>> ")
+
             line = self.reader.readline()
             parts = line.split()
             command = parts[0]
+            param = parts[1:]
+
             if command == 'top':
-                self.top(parts[1:])
+                self.top(param)
+            if command == 'draft':
+                self.draft(param)
+            if command == 'print':
+                self.printTeam(param)
             if command == 'quit':
                 return
+
             self.writer.write("\n")
 
     def sort(self):
@@ -63,11 +71,13 @@ class Ranker:
         pos = None
         num = None
 
-        if len(param) >= 1:
-            pos = param[0]
-
         if len(param) >= 2:
-            num = int(param[1])
+            pos = param[1]
+
+        if len(param) >= 1:
+            if not param[0].isdigit():
+                self.writer.write("top not formatted correctly")
+            num = int(param[0])
 
         if pos == None or pos == 'players':
             for player in self.players[:num]:
@@ -76,3 +86,19 @@ class Ranker:
             for player in self.playersByPos[pos][:num]:
                 self.writer.write(str(player) + "\n")
 
+    def draft(self, param):
+        name = " ".join(param)
+        for p in self.players:
+            if p.getName() == name:
+                player = p
+                break
+        self.players = [s for s in self.players if s.getName() != name]
+        self.playersByPos = [s for s in self.playersByPos[player.getPosition()] if s.getName() != name]
+        # draft in league
+        self.league.draft(player)
+        # sort
+        self.sort()
+
+    def printTeam(self, param):
+        name = " ".join(param)
+        self.writer.write(self.league.printTeam(name))
