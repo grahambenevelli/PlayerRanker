@@ -35,6 +35,8 @@ class Ranker:
                 self.draft(param)
             if command == 'print':
                 self.printTeam(param)
+            if command == 'current':
+                self.writer.write(self.league.getCurrentTeam());
             if command == 'quit':
                 return
 
@@ -50,7 +52,7 @@ class Ranker:
         total = 0
         for i in range(num):
             total += self.playersByPos[pos][i].getPoints()
-        average = total/num
+        average = total / num
         for player in self.playersByPos[pos]:
             player.setAverage(average)
 
@@ -72,19 +74,25 @@ class Ranker:
         num = None
 
         if len(param) >= 2:
-            pos = param[1]
+            pos = param[1].upper()
 
         if len(param) >= 1:
             if not param[0].isdigit():
                 self.writer.write("top not formatted correctly")
             num = int(param[0])
 
+        if num is None:
+            num = 10
+
         if pos == None or pos == 'players':
             for player in self.players[:num]:
                 self.writer.write(str(player) + "\n")
         else:
-            for player in self.playersByPos[pos][:num]:
-                self.writer.write(str(player) + "\n")
+            try:
+                for player in self.playersByPos[pos][:num]:
+                    self.writer.write(str(player) + "\n")
+            except KeyError:
+                self.writer.write("top not formatted correctly")
 
     def draft(self, param):
         name = " ".join(param)
@@ -93,12 +101,15 @@ class Ranker:
                 player = p
                 break
         self.players = [s for s in self.players if s.getName() != name]
-        self.playersByPos = [s for s in self.playersByPos[player.getPosition()] if s.getName() != name]
-        # draft in league
+        self.playersByPos[player.getPosition()] = [s for s in self.playersByPos[player.getPosition()] if s.getName() != name]
+        
+        self.writer.write(player.getName() + " drafted by " + self.league.getCurrentTeam())
         self.league.draft(player)
-        # sort
+
         self.sort()
 
     def printTeam(self, param):
         name = " ".join(param)
+        if name == "current":
+            name = self.league.getCurrentTeam()
         self.writer.write(self.league.printTeam(name))

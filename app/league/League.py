@@ -16,13 +16,17 @@ class League:
 			self.teams.append(Team(team, positions))
 		self.positions = positions
 		self.teamIndex = 0
+		self.positionsLeft = {}
+		for pos in positions:
+			self.positionsLeft[pos] = self.positions[pos] * len(self.teams)
 
 	def getNumPlayersToFill(self, pos):
-		return self.positions[pos] * len(self.teams)
+		return self.positionsLeft[pos]
 
 	def draft(self, player):
+		self.positionsLeft[player.getPosition()] -= 1
 		self.teams[self.teamIndex].draft(player)
-		self.teamIndex += 1
+		self.teamIndex = (self.teamIndex + 1) % len(self.teams)
 
 	def printTeam(self, name):
 		for t in self.teams:
@@ -30,3 +34,6 @@ class League:
 				team = t
 				break
 		return str(team)
+
+	def getCurrentTeam(self):
+		return self.teams[self.teamIndex].getName()
