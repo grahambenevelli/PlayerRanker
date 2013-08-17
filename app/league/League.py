@@ -12,6 +12,7 @@ class League:
 	def __init__(self, name, teams, positions, values):
 		self.name = name
 		self.values = values
+		self.asc = 1
 
 		self.teams = []
 		for team in teams:
@@ -28,7 +29,18 @@ class League:
 	def draft(self, player):
 		self.positionsLeft[player.getPosition()] -= 1
 		self.teams[self.teamIndex].draft(player)
-		self.teamIndex = (self.teamIndex + 1) % len(self.teams)
+		self.updateIndex()
+
+	def updateIndex(self):
+		if self.asc == 1 and self.teamIndex == len(self.teams) - 1:
+			self.asc = 0
+		elif self.asc == 1:
+			self.teamIndex += 1
+		elif self.teamIndex == 0:
+			self.asc = 1
+		else:
+			self.teamIndex -= 1
+
 
 	def printTeam(self, name):
 		team = None
