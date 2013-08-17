@@ -9,8 +9,10 @@ from Team import Team
 
 class League:
 	
-	def __init__(self, name, teams, positions):
+	def __init__(self, name, teams, positions, values):
 		self.name = name
+		self.values = values
+
 		self.teams = []
 		for team in teams:
 			self.teams.append(Team(team, positions))
@@ -29,6 +31,7 @@ class League:
 		self.teamIndex = (self.teamIndex + 1) % len(self.teams)
 
 	def printTeam(self, name):
+		team = None
 		for t in self.teams:
 			if t.getName() == name:
 				team = t
@@ -37,3 +40,6 @@ class League:
 
 	def getCurrentTeam(self):
 		return self.teams[self.teamIndex].getName()
+
+	def getValues(self):
+		return self.values

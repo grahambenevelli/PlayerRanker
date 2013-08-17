@@ -29,7 +29,20 @@ class LeagueFactory:
 			if int(line) == len(leagueNames) + 1:
 				teams = ['Team1', 'Team2', 'Team3', 'Team4', 'Team5', 'Team6', 'Team7', 'Team8', 'Team9', 'Team10', 'Team11', 'Team12']
 				positions = {'QB': 1, 'RB': 3, 'WR': 3, 'TE': 1, 'DEF': 1}
-				return League("Default", teams, positions)
+				values = {
+					"Pass Yds": 0.04,
+					"Pass TD": 4,
+					"Pass Int": -1,
+					"Rush Yards": 0.1,
+					"Rush TD": 6,
+					"Rec Yards": 0.1,
+					"Rec TD": 6,
+					"Ret TD": 6,
+					"2PT": 2,
+					"Fumbles Lost": -2,
+				}
+				return League("Default", teams, positions, values)
+
 			return self.buildLeagueFromFile(leagueNames[int(line) - 1])
 
 	def buildLeagueFromFile(self, file):
@@ -38,7 +51,7 @@ class LeagueFactory:
 		data = json.load(json_data)
 		json_data.close()
 
-		return League("Default", data['teams'], data['positions'])
+		return League("Default", data['teams'], data['positions'], data['values'])
 
 	def printLeague(self, leagueNames):
 		index = 1

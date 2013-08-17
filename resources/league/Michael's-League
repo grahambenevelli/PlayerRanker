@@ -1,8 +1,8 @@
 {
 	"name": "Michael's League",
 	"positions": {
-		"QB": 2,
-		"RB": 3,
+		"QB": 1,
+		"RB": 2,
 		"WR": 3,
 		"TE": 1,
 		"DEF": 1
@@ -20,5 +20,17 @@
 		"Team 10",
 		"Team 11",
 		"Team 12"
-	]
+	],
+	"values": {
+		"Pass Yds": 0.04,
+		"Pass TD": 4,
+		"Pass Int": -1,
+		"Rush Yards": 0.1,
+		"Rush TD": 6,
+		"Rec Yards": 0.1,
+		"Rec TD": 6,
+		"Ret TD": 6,
+		"2PT": 2,
+		"Fumbles Lost": -2
+	}
 }

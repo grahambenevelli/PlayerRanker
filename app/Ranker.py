@@ -37,16 +37,16 @@ class Ranker:
                 self.printTeam(param)
             if command == 'current':
                 self.writer.write(self.league.getCurrentTeam());
-            if command == 'quit':
+            if command == 'quit' or command == 'exit':
                 return
 
             self.writer.write("\n")
 
     def sort(self):
-        self.players.sort(key=lambda x: x.getValue(), reverse=True)
+        self.players.sort(key=lambda x: x.getValue(self.league.getValues()), reverse=True)
         for pos in self.playersByPos:
             self.setAverages(pos, self.league.getNumPlayersToFill(pos), self.playersByPos[pos])
-        self.players.sort(key=lambda x: x.getValue(), reverse=True)
+        self.players.sort(key=lambda x: x.getValue(self.league.getValues()), reverse=True)
 
     def setAverages(self, pos, num, players):
         total = 0

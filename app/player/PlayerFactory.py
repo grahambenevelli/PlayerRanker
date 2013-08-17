@@ -12,7 +12,7 @@ class PlayerFactory:
 	APP_PATH = os.path.dirname(os.path.realpath(__file__))
 
 	def __init__(self):
-		self.positions = iter(['QB', 'RB', 'WR', 'TE', 'DEF'])
+		self.positions = iter(['QB', 'RB', 'WR', 'TE'])
 		self.lines = iter([])
 
 	def __iter__(self):
@@ -26,9 +26,11 @@ class PlayerFactory:
 			return self.next()
 
 	def setUpFile(self):
-		self.lines = open( self.APP_PATH + "/../../resources/players/" + self.positions.next() + ".csv", "r" )
+		self.pos = self.positions.next()
+		self.lines = open( self.APP_PATH + "/../../resources/players/" + self.pos + "Stats.csv", "r" )
+		self.stats = self.lines.next().split(',')[2:]
 
 	def createPlayer(self, line):
 		data = line.split(',')
-		return Player(data[0], data[1], float(data[2]))
+		return Player(data[0], data[1], self.pos, dict(zip(self.stats, data[2:])))
 

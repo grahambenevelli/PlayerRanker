@@ -13,6 +13,7 @@ sys.path.append(APP_PATH + '/app/league')
 
 from Ranker import Ranker
 from LeagueFactory import LeagueFactory
+from PlayerFactory import PlayerFactory
 
 # ----
 # main
