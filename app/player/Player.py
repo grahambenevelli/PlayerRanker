@@ -57,3 +57,9 @@ class Player:
 			except KeyError:
 				continue
 		return points
+
+	def getStats(self):
+		return self.stats
+
+	def setStat(self, stat, value):
+		self.stats[stat] = value

@@ -4,6 +4,9 @@ import os
 import sys
 
 sys.path.append('app/team')
+sys.path.append('app/player')
+
+from PlayerStorage import PlayerStorage
 
 from Team import Team
 
@@ -23,13 +26,18 @@ class League:
 		for pos in positions:
 			self.positionsLeft[pos] = self.positions[pos] * len(self.teams)
 
-	def getNumPlayersToFill(self, pos):
-		return self.positionsLeft[pos]
+		self.players = PlayerStorage()
+		self.players.sort(self.getValues(), self.getNumPlayersToFill())
+
+	def getNumPlayersToFill(self):
+		return self.positionsLeft
 
 	def draft(self, player):
+		self.players.eliminatePlayer(player)
 		self.positionsLeft[player.getPosition()] -= 1
 		self.teams[self.teamIndex].draft(player)
 		self.updateIndex()
+		self.players.sort(self.getValues(), self.getNumPlayersToFill())		
 
 	def updateIndex(self):
 		if self.asc == 1 and self.teamIndex == len(self.teams) - 1:
@@ -55,3 +63,9 @@ class League:
 
 	def getValues(self):
 		return self.values
+
+	def top(self, pos, num):
+		return self.players.top(pos, num)
+
+	def getPlayer(self, name):
+		return self.players.getPlayer(name)

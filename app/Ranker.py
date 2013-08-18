@@ -17,8 +17,6 @@ class Ranker:
         self.reader = reader
         self.writer = writer
         self.playerFactory = PlayerFactory()
-        self.importAllPlayers()
-        self.sort()
 
     def run(self):
         while True:
@@ -42,33 +40,6 @@ class Ranker:
 
             self.writer.write("\n")
 
-    def sort(self):
-        self.players.sort(key=lambda x: x.getValue(self.league.getValues()), reverse=True)
-        for pos in self.playersByPos:
-            self.setAverages(pos, self.league.getNumPlayersToFill(pos), self.playersByPos[pos])
-        self.players.sort(key=lambda x: x.getValue(self.league.getValues()), reverse=True)
-
-    def setAverages(self, pos, num, players):
-        total = 0
-        for i in range(num):
-            total += self.playersByPos[pos][i].getPoints()
-        average = total / num
-        for player in self.playersByPos[pos]:
-            player.setAverage(average)
-
-    def importAllPlayers(self):
-        self.playersByPos = {}
-        self.players = []
-        while True:
-            try:
-                player = self.playerFactory.next()
-                if player.position not in self.playersByPos:
-                    self.playersByPos[player.position] = []
-                self.playersByPos[player.position].append(player)
-                self.players.append(player)
-            except StopIteration:
-                return
-
     def top(self, param):
         pos = None
         num = None
@@ -79,35 +50,25 @@ class Ranker:
         if len(param) >= 1:
             if not param[0].isdigit():
                 self.writer.write("top not formatted correctly")
+                return
             num = int(param[0])
 
-        if num is None:
-            num = 10
-
-        if pos == None or pos == 'players':
-            for player in self.players[:num]:
+        try:
+            for player in self.league.top(pos, num):
                 self.writer.write(str(player) + "\n")
-        else:
-            try:
-                for player in self.playersByPos[pos][:num]:
-                    self.writer.write(str(player) + "\n")
-            except KeyError:
-                self.writer.write("top not formatted correctly")
+        except KeyError:
+            self.writer.write("top not formatted correctly")
 
     def draft(self, param):
         name = " ".join(param)
-        for p in self.players:
-            if p.getName() == name:
-                player = p
-                break
-        self.players = [s for s in self.players if s.getName() != name]
-        self.playersByPos[player.getPosition()] = [s for s in self.playersByPos[player.getPosition()] if s.getName() != name]
-        
+        player = self.league.getPlayer(name)
+
+        if player == None:
+            self.writer.write("Player by name " + name + " doesn't exist")
+
         self.writer.write(player.getName() + " drafted by " + self.league.getCurrentTeam())
         self.league.draft(player)
-
-        self.sort()
-
+        
     def printTeam(self, param):
         name = " ".join(param)
         if name == "current":
