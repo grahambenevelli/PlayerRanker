@@ -23,7 +23,7 @@ class Player:
 			and (not hasattr(self, 'initialAverage') or self.initialAverage == other.initialAverage))
 
 	def __str__(self):
-		return self.name + " " + self.position + ": " + str(self.getValue())
+		return self.name + " " + self.position + ": " + str(self.getPoints())
 
 	def getName(self):
 		return self.name
@@ -33,6 +33,9 @@ class Player:
 
 	def getPoints(self):
 		return self.points
+
+	def getTeam(self):
+		return self.team
 
 	def setAverage(self, average, first = False):
 		if first or not hasattr(self, 'initialAverage'):
@@ -59,7 +62,19 @@ class Player:
 		return points
 
 	def getStats(self):
-		return self.stats
+		return ["Name", "Team"] + [value for value in self.stats if value != "Fan Pts\n"]
 
 	def setStat(self, stat, value):
 		self.stats[stat] = value
+
+	def toCsv(self, columns):
+		row = []
+		for col in columns:
+			if col == 'Name':
+				row.append(self.getName())
+				continue
+			if col == 'Team':
+				row.append(self.getTeam())
+				continue
+			row.append(str(self.stats[col]))
+		return ",".join(row)

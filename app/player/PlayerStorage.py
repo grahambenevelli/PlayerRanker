@@ -11,6 +11,9 @@ class PlayerStorage:
 		self.playerFactory = PlayerFactory()
 		self.importAllPlayers()
 
+	def __iter__(self):
+		return iter(self.players)
+
 	def importAllPlayers(self):
 		self.playersByPos = {}
 		self.players = []
@@ -55,4 +58,7 @@ class PlayerStorage:
 	def eliminatePlayer(self, player):
 		self.players.remove(player)
 		self.playersByPos[player.getPosition()].remove(player)
+
+	def getColumns(self):
+		return list(self.players[0].getStats())
 		
