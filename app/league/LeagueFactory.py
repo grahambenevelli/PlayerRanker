@@ -51,7 +51,11 @@ class LeagueFactory:
 		data = json.load(json_data)
 		json_data.close()
 
-		return League("Default", data['teams'], data['positions'], data['values'])
+		keepers = {}
+		if 'keepers' in data:
+			keepers = data['keepers']
+
+		return League("Default", data['teams'], data['positions'], data['values'], keepers)
 
 	def printLeague(self, leagueNames):
 		index = 1

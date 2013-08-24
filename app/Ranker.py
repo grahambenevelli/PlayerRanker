@@ -34,7 +34,7 @@ class Ranker:
             if command == 'print':
                 self.printTeam(param)
             if command == 'current':
-                self.writer.write(self.league.getCurrentTeam());
+                self.writer.write(self.league.getCurrentTeam().getName());
             if command == 'quit' or command == 'exit':
                 return
 
@@ -66,11 +66,12 @@ class Ranker:
         if player == None:
             self.writer.write("Player by name " + name + " doesn't exist")
 
-        self.writer.write(player.getName() + " drafted by " + self.league.getCurrentTeam())
+        self.writer.write(player.getName() + " drafted by " + self.league.getCurrentTeam().getName() + "\n")
         self.league.draft(player)
+        self.writer.write(self.league.getCurrentTeam().getName() + " now on clock")
         
     def printTeam(self, param):
         name = " ".join(param)
         if name == "current":
-            name = self.league.getCurrentTeam()
+            name = self.league.getCurrentTeam().getName()
         self.writer.write(self.league.printTeam(name))

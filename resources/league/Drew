@@ -35,15 +35,65 @@
 		"Rec 40 yd TD": 3
 	},
 	"keepers": {
-		"Gandhi's Genius's": [],
-		"Smurfs!": [],
-		"Austin Beer Guzzlers": [],
-		"Raiders": [],
-		"Demonators 2.0": [],
-		"Hail Mary to Roy": [],
-		"Eskimo Brothers": [],
-		"Lightly Carbonated": [],
-		"The $Badger": [],
-		"Platinum Stallion": []
+		"Gandhi's Genius's": [
+			"Michael Vick",
+			"Reggie Bush",
+			"Andre Johnson",
+			"A.J. Green"
+		],
+		"Smurfs!": [
+			"Robert Griffin III",
+			"Jamaal Charles",
+			"Matt Forte",
+			"Eli Manning"
+		],
+		"Austin Beer Guzzlers": [
+			"Jimmy Graham",
+			"Cam Newton",
+			"Tom Brady",
+			"Ray Rice"
+		],
+		"Raiders": [
+			"C.J. Spiller",
+			"Vincent Jackson",
+			"Roddy White",
+			"Wes Welker"
+		],
+		"Demonators 2.0": [
+			"Chris Johnson",
+			"Danny Amendola",
+			"Jason Witten",
+			"Peyton Manning"
+		],
+		"Hail Mary to Roy": [
+			"Aaron Rodgers",
+			"Alfred Morris",
+			"Steven Jackson",
+			"Matthew Stafford"
+		],
+		"Eskimo Brothers": [
+			"Calvin Johnson",
+			"LeSean McCoy",
+			"Tony Romo",
+			"Victor Cruz"
+		],
+		"Lightly Carbonated": [
+			"Arian Foster",
+			"Trent Richardson",
+			"Julio Jones",
+			"Matt Ryan"
+		],
+		"The $Badger": [
+			"Brandon Marshall",
+			"Demaryius Thomas",
+			"Adrian Peterson",
+			"Andrew Luck"
+		],
+		"Platinum Stallion": [
+			"Drew Brees",
+			"Doug Martin",
+			"Dez Bryant",
+			"Marshawn Lynch"
+		]
 	}
 }
