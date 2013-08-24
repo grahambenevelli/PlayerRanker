@@ -6,6 +6,7 @@ import sys
 class Team:
 
 	def __init__(self, name, positions):
+		self.positions = positions
 		self.name = name
 		self.roster = {}
 		for position in positions:
@@ -14,11 +15,11 @@ class Team:
 
 	def __str__(self):
 		ret = self.name + "\n"
-		for spot in self.roster:
-			ret += spot + ": \t"
-			for player in self.roster[spot]:
-				ret += str(player)
-			if len(self.roster[spot]) == 0:
+		for pos in self.positions:
+			for x in range(self.positions[pos]):
+				ret += pos + ": \t"
+				if x < len(self.roster[pos]):
+					ret += self.roster[pos][x].getName()
 				ret += "\n"
 		return ret
 
