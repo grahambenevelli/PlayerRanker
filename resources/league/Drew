@@ -1,0 +1,49 @@
+{
+	"name": "Michael's League",
+	"positions": {
+		"QB": 3,
+		"RB": 4,
+		"WR": 4,
+		"TE": 2
+	},
+	"teams": [
+		"Gandhi's Genius's",
+		"Smurfs!",
+		"Austin Beer Guzzlers",
+		"Raiders",
+		"Demonators 2.0",
+		"Hail Mary to Roy",
+		"Eskimo Brothers",
+		"Lightly Carbonated",
+		"The $Badger",
+		"Platinum Stallion"
+	],
+	"values": {
+		"Pass Yds": 0.04,
+		"Pass TD": 4,
+		"Pass Int": -1,
+		"Rush Yards": 0.1,
+		"Rush TD": 6,
+		"Rec Yards": 0.1,
+		"Rec TD": 6,
+		"Ret TD": 6,
+		"2PT": 2,
+		"Fumbles Lost": -2,
+		"Pick Six": -2,
+		"Pass 40 yd TD": 2,
+		"Rush 40 yd TD": 3,
+		"Rec 40 yd TD": 3
+	},
+	"keepers": {
+		"Gandhi's Genius's": [],
+		"Smurfs!": [],
+		"Austin Beer Guzzlers": [],
+		"Raiders": [],
+		"Demonators 2.0": [],
+		"Hail Mary to Roy": [],
+		"Eskimo Brothers": [],
+		"Lightly Carbonated": [],
+		"The $Badger": [],
+		"Platinum Stallion": []
+	}
+}

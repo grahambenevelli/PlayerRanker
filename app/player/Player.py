@@ -23,7 +23,7 @@ class Player:
 			and (not hasattr(self, 'initialAverage') or self.initialAverage == other.initialAverage))
 
 	def __str__(self):
-		return self.name + " " + self.position + ": " + str(self.getPoints())
+		return self.name + " " + self.position + ": " + str(self.getPoints()) + " " + str(self.getValue())
 
 	def getName(self):
 		return self.name

@@ -49,7 +49,7 @@ while curr_row < num_rows:
 	player = league.getPlayer(row['Player'].value)
 	if player is None:
 		continue
-
+	print row
 	player.setStat('Pass Yds', row['Y Pa'].value)
 	player.setStat('Pass TD', row['TD P'].value)
 	player.setStat('Pass Int', row['Int'].value)

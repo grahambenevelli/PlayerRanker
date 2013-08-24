@@ -32,6 +32,8 @@ class PlayerStorage:
 		for pos in self.playersByPos:
 			self.setAverages(pos, numPlayers[pos], self.playersByPos[pos])
 		self.players.sort(key=lambda x: x.getValue(values), reverse=True)
+		for pos in self.playersByPos:
+			self.playersByPos[pos].sort(key=lambda x: x.getValue(values), reverse=True)
 
 	def setAverages(self, pos, num, players):
 		total = 0
