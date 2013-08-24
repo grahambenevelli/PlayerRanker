@@ -61,10 +61,34 @@ class Ranker:
 
     def draft(self, param):
         name = " ".join(param)
+        possibles = self.league.getPossiblePlayers(name)
+        while True:
+            if len(possibles) == 0:
+                self.writer.write("No one by that names exists")
+                return
+            if len(possibles) == 1:
+                name = possibles[0]
+                break
+            for x in range(len(possibles)):
+                self.writer.write(str(x + 1) + ": ")
+                self.writer.write(possibles[x] + "\n")
+            self.writer.write("Do you mean one of these: ")
+            line = self.reader.readline()
+            print line
+            if line.strip().isdigit():
+                print "true"
+            else:
+                print "false"
+            if line.strip().isdigit() and int(line) > 0 and int(line) <= len(possibles):
+                name = possibles[int(line) - 1]
+                break
+
+
         player = self.league.getPlayer(name)
 
         if player == None:
             self.writer.write("Player by name " + name + " doesn't exist")
+            return
 
         self.writer.write(player.getName() + " drafted by " + self.league.getCurrentTeam().getName() + "\n")
         self.league.draft(player)

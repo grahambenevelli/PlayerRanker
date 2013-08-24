@@ -2,6 +2,7 @@
 
 import os
 import sys
+import difflib
 
 sys.path.append('app/team')
 sys.path.append('app/player')
@@ -84,3 +85,6 @@ class League:
 		for team in self.teams:
 			if teamName == team.getName():
 				return team
+
+	def getPossiblePlayers(self, name):
+		return difflib.get_close_matches(name, [x.getName() for x in self.players.players])
