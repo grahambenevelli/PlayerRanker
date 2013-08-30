@@ -24,8 +24,8 @@ from PlayerEditor import PlayerEditor
 leagueFactory = LeagueFactory()
 league = leagueFactory.getLeague(sys.stdin, sys.stdout)
 
-playerEditor = PlayerEditor(sys.stdin, sys.stdout, league)
-playerEditor.run()
+# playerEditor = PlayerEditor(sys.stdin, sys.stdout, league)
+# playerEditor.run()
 
 ranker = Ranker(league, sys.stdin, sys.stdout)
 ranker.run()

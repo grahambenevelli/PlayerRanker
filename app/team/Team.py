@@ -19,7 +19,7 @@ class Team:
 			for x in range(self.positions[pos]):
 				ret += pos + ": \t"
 				if x < len(self.roster[pos]):
-					ret += self.roster[pos][x].getName()
+					ret += self.roster[pos][x].getName() + " " + str(self.roster[pos][x].getPoints())
 				ret += "\n"
 		return ret
 
