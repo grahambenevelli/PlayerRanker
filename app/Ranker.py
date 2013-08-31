@@ -23,6 +23,8 @@ class Ranker:
             self.writer.write(">>>> ")
 
             line = self.reader.readline()
+            if line == "\n":
+                continue
             parts = line.split()
             command = parts[0]
             param = parts[1:]

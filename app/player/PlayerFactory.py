@@ -28,7 +28,7 @@ class PlayerFactory:
 	def setUpFile(self):
 		self.pos = self.positions.next()
 		self.lines = open( self.APP_PATH + "/../../resources/players/" + self.pos + "Stats.csv", "r" )
-		self.stats = self.lines.next().split(',')[2:]
+		self.stats = [x.strip() for x in self.lines.next().split(',')[2:]]
 
 	def createPlayer(self, line):
 		data = line.split(',')

@@ -2,6 +2,7 @@
 
 import os
 import sys
+import math
 
 APP_PATH = os.path.dirname(os.path.realpath(__file__))
 
@@ -14,6 +15,7 @@ class Player:
 		self.stats = stats
 		self.points = None
 		self.value = None
+		self.deviation = None
 
 	def __eq__(self, other):
 		return (isinstance(other, self.__class__)
@@ -42,6 +44,12 @@ class Player:
 			self.initialAverage = average
 		self.average = average
 
+	def getDeviation(self):
+		return math.fabs(self.points - self.average)
+
+	def setDeviation(self, dev):
+		self.deviation = dev
+
 	def getValue(self, values = None):
 		if values is None:
 			return self.value
@@ -49,7 +57,10 @@ class Player:
 			self.points = self.mapPoints(self.stats, values)
 		if not hasattr(self, 'average'):
 			return self.points
-		self.value = ((self.points - self.average) + (self.points - self.initialAverage)) / 2
+		if not hasattr(self, 'deviation'):
+			self.value = ((self.points - self.average) + (self.points - self.initialAverage)) / 2
+			return self.value
+		self.value = ((self.points - self.average + self.deviation) + (self.points - self.initialAverage + self.deviation)) / 2
 		return self.value
 
 	def mapPoints(self, stats, values):
@@ -76,5 +87,5 @@ class Player:
 			if col == 'Team':
 				row.append(self.getTeam())
 				continue
-			row.append(str(self.stats[col]))
+			row.append(str(self.stats[col]).strip())
 		return ",".join(row)

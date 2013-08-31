@@ -7,7 +7,6 @@
 		"TE": 1
 	},
 	"teams": [
-		"Burnt Orange Cows",
 		"Team 2",
 		"Team 3",
 		"Team 4",
@@ -18,7 +17,8 @@
 		"Team 9",
 		"Team 10",
 		"Team 11",
-		"Team 12"
+		"Team 12",
+		"Burnt Orange Cows"
 	],
 	"values": {
 		"Pass Yds": 0.04,

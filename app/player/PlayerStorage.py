@@ -31,6 +31,7 @@ class PlayerStorage:
 		self.players.sort(key=lambda x: x.getValue(values), reverse=True)
 		for pos in self.playersByPos:
 			self.setAverages(pos, numPlayers[pos], self.playersByPos[pos])
+			self.setDeviation(pos, numPlayers[pos], self.playersByPos[pos])
 		self.players.sort(key=lambda x: x.getValue(values), reverse=True)
 		for pos in self.playersByPos:
 			self.playersByPos[pos].sort(key=lambda x: x.getValue(values), reverse=True)
@@ -42,6 +43,14 @@ class PlayerStorage:
 		average = total / num
 		for player in self.playersByPos[pos]:
 			player.setAverage(average)
+
+	def setDeviation(self, pos, num, players):
+		total = 0
+		for i in range(num):
+			total += self.playersByPos[pos][i].getDeviation()
+		deviation = total / num
+		for player in self.playersByPos[pos]:
+			player.setDeviation(deviation)
 
 	def top(self, pos = 'players', num = None):
 		if num is None:

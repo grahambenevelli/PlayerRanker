@@ -27,7 +27,7 @@ from CsvManager import CsvManager
 leagueFactory = LeagueFactory()
 league = leagueFactory.getLeague(sys.stdin, sys.stdout)
 
-workbook = xlrd.open_workbook(APP_PATH + '/resources/stats/20130815.xls')
+workbook = xlrd.open_workbook(APP_PATH + '/resources/stats/20130830.xls')
 
 worksheet = workbook.sheet_by_name('2013 proj - season')
 
